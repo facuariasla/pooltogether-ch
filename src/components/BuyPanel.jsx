@@ -4,15 +4,16 @@ import {
   Text,
   FormControl,
   Input,
-  InputGroup,
   Button,
   FormLabel,
-  InputRightElement,
+  Skeleton,
+  Spinner,
 } from "@chakra-ui/react";
 import { FaChevronRight } from "react-icons/fa";
 
 import useStore from "../global_state";
 import BuyButtonList from "./BuyButtonList";
+import ReceiveButtonList from "./ReceiveButtonList";
 
 const BuyPanel = () => {
   const tokens = useStore((state) => state.tokens);
@@ -40,21 +41,30 @@ const BuyPanel = () => {
                 Cantidad
               </FormLabel>
 
-              <Stack size="md" display="flex" direction='row' align='center'>
+              <Stack size="md" display="flex" direction="row" align="center">
                 <Input
                   id="quantity"
-                  type="text"
+                  type="number"
+                  max={2}
                   h={16}
-                  placeholder="CONTIONAL CURRENCY"
+                  placeholder="0.000"
                   borderRadius={12}
                   color="#fff"
                   _placeholder={{ fontWeight: "400" }}
                   fontWeight={500}
-                  bgColor='#493171'
-                  border='none'
+                  bgColor="#493171"
+                  border="none"
                 />
-                  <BuyButtonList/>
-
+                {/* <BuyButtonList/> */}
+                {tokens ? (
+                  <BuyButtonList />
+                ) : (
+                  <Skeleton
+                    height={16}
+                    borderRadius={12}
+                    w={["70px", "100px"]}
+                  />
+                )}
               </Stack>
             </Stack>
 
@@ -63,20 +73,31 @@ const BuyPanel = () => {
                 Recibir
               </FormLabel>
 
-              <Stack size="md" display="flex" direction='row' align='center'>
+              <Stack size="md" display="flex" direction="row" align="center">
                 <Input
                   id="quantity"
-                  type="text"
+                  type="number"
+                  required
+                  maxLength={10}
                   h={16}
-                  placeholder="CONTIONAL CURRENCY"
+                  placeholder="0.000"
                   borderRadius={12}
                   color="#fff"
                   _placeholder={{ fontWeight: "400" }}
                   fontWeight={500}
-                  bgColor='#493171'
-                  border='none'
+                  bgColor="#493171"
+                  border="none"
                 />
-                  <BuyButtonList/>
+                {/* <BuyButtonList /> */}
+                {tokens ? (
+                  <ReceiveButtonList />
+                ) : (
+                  <Skeleton
+                    height={16}
+                    borderRadius={12}
+                    w={["70px", "100px"]}
+                  />
+                )}
               </Stack>
             </Stack>
           </Stack>
@@ -84,12 +105,8 @@ const BuyPanel = () => {
 
         {/* ACA VA UN CONDITIONAL BUTTON */}
       </form>
-
-
     </Stack>
   );
 };
-
-
 
 export default BuyPanel;

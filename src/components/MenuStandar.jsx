@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Menu,
   MenuButton,
@@ -24,16 +25,26 @@ const MenuStandar = () => {
         _hover={{ bgColor: "#2D0B5A", color: "#fff" }}
         _active={{ bgColor: "#2D0B5A", color: "#fff" }}
         fontSize={30}
-        display='flex'
+        display="flex"
       >
         <CgMenuLeft />
       </MenuButton>
-      <MenuList>
-        <MenuItem>Download</MenuItem>
-        <MenuItem>Create a Copy</MenuItem>
-        <MenuItem>Mark as Draft</MenuItem>
-        <MenuItem>Delete</MenuItem>
-        <MenuItem>Attend a Workshop</MenuItem>
+      <MenuList bgColor="#5227A7" color="#fff" border="none">
+        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+          <Link to="/">Home</Link>
+        </MenuItem>
+        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+          <Link to="/buy">Buy/Sell</Link>
+        </MenuItem>{" "}
+        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+          Lorem2
+        </MenuItem>
+        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+          Lorem3
+        </MenuItem>
+        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+          Lorem4
+        </MenuItem>
       </MenuList>
     </Menu>
   );
