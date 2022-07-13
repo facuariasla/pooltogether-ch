@@ -1,7 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import BottomMenuMob from "./BottomMenuMob";
-import BuyContent from "./BuyContent";
 import Header from "./Header";
 import HomeCover from "./HomeCover";
 

@@ -28,9 +28,9 @@ const Header = () => {
       alignItems="center"
     >
       <Stack>
-        <a href="https://app.pooltogether.com/deposit?network=polygon" target="_blank">
+        <Link to="/">
           <Image src={logo} h="50px" />
-        </a>
+        </Link>
       </Stack>
 
       <Stack>
@@ -99,7 +99,7 @@ const Header = () => {
               borderRadius={12}
 
             >
-              Buy
+              Buy/Sell
             </Button>
           </Link>
         </Stack>

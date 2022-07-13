@@ -79,7 +79,7 @@ const BottomMenuMob = () => {
             _hover={{ backgroundColor: "#341762", color: "#fff" }}
             color="gray.300"
           >
-            Buy
+            Buy/Sell
           </Button>
         </Link>
         </Stack>

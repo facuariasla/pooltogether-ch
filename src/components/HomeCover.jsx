@@ -1,19 +1,18 @@
 import React from 'react'
-import {Stack} from '@chakra-ui/react';
+import {Stack, Heading} from '@chakra-ui/react';
 
 const HomeCover = () => {
   return (
-    <Stack>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
-      <h2>homecover</h2>
+    <Stack align='center'>
+      <Heading>IR A BUY</Heading>
+      <Heading>IR A BUY</Heading>
+      <Heading>IR A BUY</Heading>
+      <Heading>IR A BUY</Heading>
+      <Heading>IR A BUY</Heading>
+      <Heading>IR A BUY</Heading>
+      <Heading>IR A BUY</Heading>
+      <Heading>IR A BUY</Heading>
+
     </Stack>
   )
 }

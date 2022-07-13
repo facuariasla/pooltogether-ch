@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Stack } from '@chakra-ui/react'
-import BuyPanels from './BuyPanels';
+import BuyPanels from './TradePanels';
 
 
-const BuyContent = () => {
+const TradeContainer = () => {
 
-  const [coinsData, setCoinsData] = useState('');
   return (
     <Stack>
       <Stack pt={8}>
@@ -15,4 +14,4 @@ const BuyContent = () => {
   )
 }
 
-export default BuyContent
+export default TradeContainer

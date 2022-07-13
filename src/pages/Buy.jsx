@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import BottomMenuMob from "../components/BottomMenuMob";
-import BuyContent from "../components/BuyContent";
+import TradeContainer from "../components/TradeContainer";
 import Header from "../components/Header";
 
 const Buy = () => {
@@ -9,7 +9,7 @@ const Buy = () => {
     <Box display='flex' justifyContent='center' minH='100vh'>
     <Box width='100%' h='100%' maxW='1280px'>
       <Header/>
-      <BuyContent/>
+      <TradeContainer/>
       <BottomMenuMob/>
     </Box>
   </Box>
