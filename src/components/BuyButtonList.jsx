@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Menu,
   MenuButton,
   MenuItem,
@@ -16,8 +17,11 @@ import useStore from "../global_state";
 const BuyButtonList = () => {
   const mobToken = useBreakpointValue({ base: true, sm: false });
 
-  const tokens = useStore((state) => state.tokens);
-  const fetchTokens = useStore((state) => state.fetchTokens);
+  // TODOS los tokens (en ReceiveButton)
+
+  // tokens de la wallet del  usuario
+  const walletTokens = useStore((state) => state.walletTokens);
+  const setTokenToPay = useStore((state) => state.setTokenToPay);
 
   const favTokens = useStore((state) => state.favTokens);
   const addToFav = useStore((state) => state.addToFav);
@@ -27,10 +31,6 @@ const BuyButtonList = () => {
 
   // const tokenToReceive = useStore((state) => state.tokenToReceive);
   // const setTokenToReceive = useStore((state) => state.setTokenToReceive);
-
-  useEffect(() => {
-    fetchTokens();
-  }, [fetchTokens]);
 
   const handleAddFav = (el) => {
     // console.log(favTokens)
@@ -44,8 +44,8 @@ const BuyButtonList = () => {
   }
 
   const handleSetToken = (token) => {
-    console.log('token seteado: ', token);
-    console.log('token anterior: ', tokenToBuy);
+    console.log('token de la wallet: ', token);
+    console.log('token anterior de la wallet: ', tokenToBuy);
     setTokenToBuy(token);
   }
 
@@ -72,8 +72,8 @@ const BuyButtonList = () => {
           bgColor="#35F0D0"
           color="#2D0B5A"
         >
-          {tokens?.map((el) => (
-            <MenuItem key={el.address} fontWeight="500">
+          {walletTokens?.map((el) => (
+            <MenuItem key={el.id} fontWeight="500">
               {mobToken ? (
                 <Stack
                   direction="row"

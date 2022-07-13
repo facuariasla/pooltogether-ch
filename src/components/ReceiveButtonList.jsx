@@ -1,5 +1,5 @@
 import { Box, Button, Menu, MenuButton, MenuList, MenuItem, Stack, Text, useBreakpointValue } from '@chakra-ui/react';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaChevronRight, FaStar, FaRegStar } from "react-icons/fa";
 import useStore from "../global_state";
 
@@ -20,6 +20,9 @@ const ReceiveButtonList = () => {
     setTokenToReceive(token)
   }
 
+  useEffect(() => {
+    fetchTokens();
+  }, [fetchTokens]);
 
   return (
     <Box>
@@ -65,6 +68,12 @@ const ReceiveButtonList = () => {
                   <Text onClick={()=> handleTokenToReceive(el)} w='100%'>
                     {el.name} ({el.symbol})
                   </Text>
+                  <Stack
+                    fontSize={20}
+                    onClick={()=>handleAddFav(el)}
+                  >
+                    <FaRegStar />
+                  </Stack>
                 </Stack>
               )}
             </MenuItem>
