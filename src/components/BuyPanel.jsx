@@ -19,9 +19,19 @@ const BuyPanel = () => {
   const tokens = useStore((state) => state.tokens);
   const fetchTokens = useStore((state) => state.fetchTokens);
 
+  const ETHprice = useStore((state) => state.ETHprice);
+  const fetchETHPrice = useStore((state) => state.fetchETHPrice);
+
   useEffect(() => {
     fetchTokens();
   }, [fetchTokens]);
+
+  useEffect(() => {
+    // 1000000000000000000 = 1
+    // CHECK HOW TO APLY ARGUMENTS TO THIS FETCH 
+    // 
+    fetchETHPrice();
+  }, [fetchETHPrice]);
 
   const handleClick = () => {
     console.log(tokens);
@@ -30,7 +40,7 @@ const BuyPanel = () => {
   return (
     <Stack>
       <Stack align="center">
-        <Text>BT PRICE $$$</Text>
+        <Text fontWeight={500} color='gray.300'>1 ETH = {ETHprice} USDT</Text>
       </Stack>
 
       <form autoComplete="off">
@@ -54,6 +64,7 @@ const BuyPanel = () => {
                   fontWeight={500}
                   bgColor="#493171"
                   border="none"
+                  fontSize={20}
                 />
                 {/* <BuyButtonList/> */}
                 {tokens ? (
@@ -87,6 +98,8 @@ const BuyPanel = () => {
                   fontWeight={500}
                   bgColor="#493171"
                   border="none"
+                  fontSize={20}
+
                 />
                 {/* <BuyButtonList /> */}
                 {tokens ? (

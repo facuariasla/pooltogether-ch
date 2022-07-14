@@ -3,7 +3,7 @@ export const createTokenSlice = (set, get) => ({
   favTokens: [],
   tokenToBuy: null,
   tokenToReceive: null,
-
+  ETHprice: null,
   fetchTokens: async () => {
     const res = await fetch("https://api.0x.org/swap/v1/tokens");
     const data = await res.json();
@@ -17,23 +17,33 @@ export const createTokenSlice = (set, get) => ({
 
     set({ tokens: dataFiltered });
   },
+  // https://api.0x.org/swap/v1/price?sellToken=WETH&buyToken=USDT&sellAmount=1000000000000000000
+  fetchETHPrice: async () => {
+    // ETH y USDT pueden ser variables ${}
+    const res = await fetch("https://api.0x.org/swap/v1/price?sellToken=ETH&buyToken=USDT&sellAmount=1000000000000000000");
+    const data = await res.json();
+    set({ ETHprice: data.price });
+  },
+
   addToFav: (xToken) => {
-    if(get().favTokens.length < 3){
+    if (get().favTokens.length < 3) {
       set({
         favTokens: [...new Set([...get().favTokens, xToken])],
       });
     } else {
-      console.log('Elimina algun fav hdp')
+      let message = 'delete'
+      console.log(message)
+      return message
     }
   },
-  setTokenToBuy: (token)=> {
+  setTokenToBuy: (token) => {
     set({
-      tokenToBuy: token
-    })
+      tokenToBuy: token,
+    });
   },
-  setTokenToReceive: (token)=> {
+  setTokenToReceive: (token) => {
     set({
-      tokenToReceive: token
-    })
+      tokenToReceive: token,
+    });
   },
 });

@@ -23,8 +23,6 @@ const BuyButtonList = () => {
   const walletTokens = useStore((state) => state.walletTokens);
   const setTokenToPay = useStore((state) => state.setTokenToPay);
 
-  const favTokens = useStore((state) => state.favTokens);
-  const addToFav = useStore((state) => state.addToFav);
 
   const tokenToBuy = useStore((state) => state.tokenToBuy);
   const setTokenToBuy = useStore((state) => state.setTokenToBuy);
@@ -32,16 +30,7 @@ const BuyButtonList = () => {
   // const tokenToReceive = useStore((state) => state.tokenToReceive);
   // const setTokenToReceive = useStore((state) => state.setTokenToReceive);
 
-  const handleAddFav = (el) => {
-    // console.log(favTokens)
-    // favTokens.unshift(x);
-    // if (a.length > 7) {
-    //     a.length = 7;
-    // }
-    console.log(el);
-    console.log(favTokens)
-    addToFav(el)
-  }
+
 
   const handleSetToken = (token) => {
     console.log('token de la wallet: ', token);
@@ -56,7 +45,7 @@ const BuyButtonList = () => {
         <MenuButton
           as={Button}
           rightIcon={<FaChevronRight />}
-          w={["70px", "100px"]}
+          w={["80px", "100px"]}
           p={2}
           h={16}
           borderRadius={12}
@@ -71,9 +60,26 @@ const BuyButtonList = () => {
           overflowX="hidden"
           bgColor="#35F0D0"
           color="#2D0B5A"
+          border='none'
+          css={{
+            '&::-webkit-scrollbar':{
+              width: '6px'
+            },
+            '&::-webkit-scrollbar-track':{
+              background: '#333',
+              
+            },
+            '&::-webkit-scrollbar-thumb':{
+              background: '#888',
+              borderRadius: '10px'
+            },
+            '&::-webkit-scrollbar-thumb:hover':{
+              background: '#555'
+            },
+          }}
         >
           {walletTokens?.map((el) => (
-            <MenuItem key={el.id} fontWeight="500">
+            <MenuItem key={el.id} fontWeight="500" >
               {mobToken ? (
                 <Stack
                   direction="row"
@@ -95,12 +101,6 @@ const BuyButtonList = () => {
                     {el.name} ({el.symbol})
                   </Text>
 
-                  <Stack
-                    fontSize={20}
-                    onClick={()=>handleAddFav(el)}
-                  >
-                    <FaRegStar />
-                  </Stack>
                 </Stack>
               )}
             </MenuItem>
