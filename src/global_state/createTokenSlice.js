@@ -18,7 +18,13 @@ export const createTokenSlice = (set, get) => ({
     set({ tokens: dataFiltered });
   },
   // https://api.0x.org/swap/v1/price?sellToken=WETH&buyToken=USDT&sellAmount=1000000000000000000
-  fetchETHPrice: async () => {
+  fetchETHPrice: async (selling, buying) => {
+    // selling.address 
+    // buying.address
+    
+    // selling.decimals
+    // buying.decimals
+
     // ETH y USDT pueden ser variables ${}
     const res = await fetch("https://api.0x.org/swap/v1/price?sellToken=ETH&buyToken=USDT&sellAmount=1000000000000000000");
     const data = await res.json();
