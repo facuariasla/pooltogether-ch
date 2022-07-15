@@ -34,7 +34,6 @@ const BuyPanel = () => {
 
   const addToFav = useStore((state) => state.addToFav);
   const favTokens = useStore((state) => state.favTokens);
-  const removeFav = useStore((state) => state.removeFav);
 
   const [isFav, setIsFav] = useState(false);
 
@@ -56,38 +55,22 @@ const BuyPanel = () => {
     // console.log("recibo", tokenToReceive);
     setIsFav(!isFav);
     addToFav(tokenToReceive);
-    // if (isFav === true) {
-    //   if (tokenToReceive) addToFav(tokenToReceive);
-    // } else if (isFav === false) {
-    //   //Remover el elemento de la lista
-    //   if (tokenToReceive) removeFav(tokenToReceive);
-    // }
     console.log(favTokens);
   };
 
   useEffect(() => {
     console.log(favTokens);
     console.log(tokenToReceive);
-    if((favTokens.length!==0) && tokenToReceive)
-
-    if (favTokens.includes(tokenToReceive)) {
-      setIsFav(true);
-    } else {
-      setIsFav(false);
-    }
-
-    // for (let i = 0; i < favTokens.length; i++) {
-    //   const element = favTokens[i];
-    //   if(element.symbol === tokenToReceive.symbol){
-    //     setIsFav(true);
-    //   } else {
-    //     setIsFav(false)
-    //   }
-    // }
+    if (favTokens.length !== 0 && tokenToReceive)
+      if (favTokens.includes(tokenToReceive)) {
+        setIsFav(true);
+      } else {
+        setIsFav(false);
+      }
   }, [tokenToReceive]);
 
   return (
-    <Stack>
+    <Stack pb={10}>
       <Stack align="center">
         <Text fontWeight={500} color="gray.300">
           1 ETH = {ETHprice} USDT
@@ -256,23 +239,26 @@ const BuyPanel = () => {
                 )} */}
               </Stack>
             </Stack>
+
             <Button
-              disabled={false}
+              // _disabled={(isFav&&goodAverage)?'':''}
+              // disabled={false}
+              disabled={isFav? true: false}
               fontWeight={500}
               h={10}
               borderRadius={12}
               bgColor="cian.100"
               color="purple.100"
             >
-              Completar compra
+              {isFav? 'Wait average...':'Complete'}
             </Button>
           </Stack>
         </FormControl>
 
         {/* ACA VA UN CONDITIONAL BUTTON */}
       </form>
-      <p>pago: {quantitySell}</p>
-      <p>recibo: {quantityBuy}</p>
+      {/* <p>pago: {quantitySell}</p>
+      <p>recibo: {quantityBuy}</p> */}
     </Stack>
   );
 };

@@ -104,10 +104,12 @@ export const createTokenSlice = (set, get) => ({
   addToFav: (xToken) => {
     if (get().favTokens.length < 3) {
       if (!get().favTokens.includes(xToken)) {
+        //Si no lo incluye, que lo agregue
         set({
-          favTokens: [...get().favTokens, xToken],
+          favTokens: [xToken, ...get().favTokens],
         });
       } else {
+        // Si ya lo incluye, que lo saque
         const newFavs = get().favTokens.filter((el) => el !== xToken);
         set({
           favTokens: newFavs,
@@ -117,15 +119,24 @@ export const createTokenSlice = (set, get) => ({
       //   favTokens: [...new Set([...get().favTokens, xToken])],
       // });
     } else {
+      // Si el favsTokens tiene 3 elementos:
       if (get().favTokens.includes(xToken)) {
+        // Si lo incluye al token, que lo saque
         const newFavs = get().favTokens.filter((el) => el !== xToken);
         set({
           favTokens: newFavs,
         });
+      } else {
+        // Si no lo incluye al token, que saque al ultimo
+        // y lo agregue al inicio
+        const newFavs = get().favTokens;
+        console.log('deleted: ',newFavs[2]);
+        newFavs.pop();
+        newFavs.unshift(xToken);
+        set({
+          favTokens: newFavs,
+        });
       }
-      let message = "delete";
-      console.log(message);
-      return message;
     }
   },
 
