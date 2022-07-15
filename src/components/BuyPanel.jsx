@@ -35,6 +35,9 @@ const BuyPanel = () => {
   const addToFav = useStore((state) => state.addToFav);
   const favTokens = useStore((state) => state.favTokens);
 
+  const standarTradePrice = useStore((state) => state.standarTradePrice);
+  const setStandarTradePrice = useStore((state) => state.setStandarTradePrice);
+
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
@@ -44,6 +47,13 @@ const BuyPanel = () => {
   useEffect(() => {
     fetchETHPrice();
   }, [fetchETHPrice]);
+
+  useEffect(()=>{
+    if(tokenToReceive && tokenToSell){
+      setStandarTradePrice();
+    }
+  },[tokenToReceive, tokenToSell])
+
 
   const favSell = () => {
     // Fav sell???
@@ -259,6 +269,8 @@ const BuyPanel = () => {
       </form>
       {/* <p>pago: {quantitySell}</p>
       <p>recibo: {quantityBuy}</p> */}
+      <p>You sell 1 {tokenToSell?.symbol}</p>
+      <p>You get: {standarTradePrice? standarTradePrice.price:''} {tokenToReceive?.symbol}</p>
     </Stack>
   );
 };

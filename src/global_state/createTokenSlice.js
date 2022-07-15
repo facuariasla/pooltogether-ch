@@ -70,6 +70,7 @@ export const createTokenSlice = (set, get) => ({
   tokenToSell: null,
   tokenToReceive: null,
   ETHprice: null,
+  standarTradePrice:null,
 
   fetchTokens: async () => {
     const res = await fetch("https://api.0x.org/swap/v1/tokens");
@@ -87,13 +88,6 @@ export const createTokenSlice = (set, get) => ({
 
   // https://api.0x.org/swap/v1/price?sellToken=WETH&buyToken=USDT&sellAmount=1000000000000000000
   fetchETHPrice: async (selling, buying) => {
-    // selling.address
-    // buying.address
-
-    // selling.decimals
-    // buying.decimals
-
-    // ETH y USDT pueden ser variables ${}
     const res = await fetch(
       "https://api.0x.org/swap/v1/price?sellToken=ETH&buyToken=USDT&sellAmount=1000000000000000000"
     );
@@ -161,4 +155,33 @@ export const createTokenSlice = (set, get) => ({
       tokenToReceive: toBuy[0],
     });
   },
+
+  setStandarTradePrice: async()=>{
+    // funcion que se dispare, solo si existe un tokenToSell, y tokenToBuy
+    // esta condicion va en useEffect de BuyPanel
+
+    const toSell = get().tokenToSell;
+    const toBuy = get().tokenToReceive;
+    console.log(toSell.decimals)
+    // const arrZeros = Array.from({ length: toSell.decimals }.fill(0));
+    const arrZeros = Array.from(Array(toSell.decimals).keys());
+    const strZeros = arrZeros.fill(0).join("");
+
+    const res = await fetch(
+      `https://api.0x.org/swap/v1/price?sellToken=${toSell.address}&buyToken=${toBuy.address}&sellAmount=1${strZeros}`
+    );
+    const data = await res.json();
+    set({
+      standarTradePrice: data,
+    })
+  },
+  setBestAverage: async()=>{
+    // funcion que se dispare, solo si existe un tokenToSell, y favTokens
+    const res = await fetch(
+      `https://api.0x.org/swap/v1/price?sellToken=ETH&buyToken=USDT&sellAmount=1000000000000000000`
+    );
+    const data = await res.json();
+  },
+
+
 });
