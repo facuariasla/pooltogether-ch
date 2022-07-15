@@ -24,18 +24,17 @@ const BuyButtonList = () => {
   const setTokenToPay = useStore((state) => state.setTokenToPay);
 
 
-  const tokenToBuy = useStore((state) => state.tokenToBuy);
-  const setTokenToBuy = useStore((state) => state.setTokenToBuy);
+  const tokenToSell = useStore((state) => state.tokenToSell);
+  const setTokenToSell = useStore((state) => state.setTokenToSell);
+
 
   // const tokenToReceive = useStore((state) => state.tokenToReceive);
   // const setTokenToReceive = useStore((state) => state.setTokenToReceive);
 
-
-
   const handleSetToken = (token) => {
     console.log('token de la wallet: ', token);
-    console.log('token anterior de la wallet: ', tokenToBuy);
-    setTokenToBuy(token);
+    console.log('token anterior de la wallet: ', tokenToSell);
+    setTokenToSell(token);
   }
 
 
@@ -49,17 +48,17 @@ const BuyButtonList = () => {
           p={2}
           h={16}
           borderRadius={12}
-          bgColor={tokenToBuy? "cian.100": "#ff7979"}
+          bgColor={tokenToSell? "cian.100": "#ff7979"}
           color="purple.100"
         >
-          {tokenToBuy? tokenToBuy.symbol: 'TOKEN'}
+          {tokenToSell? tokenToSell.symbol: 'TOKEN'}
         </MenuButton>
         <MenuList
           maxH="200px"
           overflowY="scroll"
           overflowX="hidden"
-          bgColor="cian.100"
-          color="purple.100"
+          bgColor="purple.50"
+          color="white"
           border='none'
           css={{
             '&::-webkit-scrollbar':{
@@ -79,7 +78,7 @@ const BuyButtonList = () => {
           }}
         >
           {walletTokens?.map((el) => (
-            <MenuItem key={el.id} fontWeight="500" >
+            <MenuItem key={el.id} fontWeight="500" _hover={{color: 'gray.800'}}>
               {mobToken ? (
                 <Stack
                   direction="row"

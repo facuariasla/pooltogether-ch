@@ -17,7 +17,7 @@ import useStore from "../global_state";
 
 const ReceiveButtonList = () => {
   const mobToken = useBreakpointValue({ base: true, sm: false });
-  const toast = useToast()
+  const toast = useToast();
 
   // Globalstate:
   const tokens = useStore((state) => state.tokens);
@@ -43,15 +43,15 @@ const ReceiveButtonList = () => {
     // El handle de limite de 3 favs esta en el global_state
     console.log("token enviado:, ", el);
     console.log("favtokens: ", favTokens);
-    if(addToFav(el)==='delete'){
-      console.log('Agregar un toast')
+    if (addToFav(el) === "delete") {
+      console.log("Agregar un toast");
       toast({
-        title: 'Límite favoritos',
+        title: "Límite favoritos",
         description: "Ya tienes 3 favoritos",
-        status: 'warning',
+        status: "warning",
         duration: 4000,
         isClosable: true,
-      })
+      });
     }
   };
 
@@ -74,8 +74,8 @@ const ReceiveButtonList = () => {
           maxH="200px"
           overflowY="scroll"
           overflowX="hidden"
-          bgColor="#35F0D0"
-          color="#2D0B5A"
+          bgColor="purple.50"
+          color="white"
           border="none"
           css={{
             "&::-webkit-scrollbar": {
@@ -94,7 +94,11 @@ const ReceiveButtonList = () => {
           }}
         >
           {tokens?.map((el) => (
-            <MenuItem key={el.address} fontWeight="500">
+            <MenuItem
+              key={el.address}
+              fontWeight="500"
+              _hover={{ color: "gray.800" }}
+            >
               {mobToken ? (
                 <Stack
                   direction="row"
