@@ -7,7 +7,6 @@ import {
   Button,
   FormLabel,
   Skeleton,
-  Spinner,
 } from "@chakra-ui/react";
 import { FaChevronRight } from "react-icons/fa";
 
@@ -113,6 +112,7 @@ const BuyPanel = () => {
                 )}
               </Stack>
             </Stack>
+            <Button disabled={true} bgColor='cian.100' color='purple.100'>Completar compra</Button>
           </Stack>
         </FormControl>
 

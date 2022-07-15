@@ -6,7 +6,15 @@ export const theme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-
+  colors: {
+    cian: {
+      100: "#35F0D0",
+    },
+    purple: {
+      50: "#5227A7",
+      100: "#2D0B5A",
+    },
+  },
   styles: {
     global: (props) => ({
       'html, body': {

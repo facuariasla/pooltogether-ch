@@ -49,8 +49,8 @@ const BuyButtonList = () => {
           p={2}
           h={16}
           borderRadius={12}
-          bgColor={tokenToBuy? "#35F0D0": "#ff7979"}
-          color="#2D0B5A"
+          bgColor={tokenToBuy? "cian.100": "#ff7979"}
+          color="purple.100"
         >
           {tokenToBuy? tokenToBuy.symbol: 'TOKEN'}
         </MenuButton>
@@ -58,8 +58,8 @@ const BuyButtonList = () => {
           maxH="200px"
           overflowY="scroll"
           overflowX="hidden"
-          bgColor="#35F0D0"
-          color="#2D0B5A"
+          bgColor="cian.100"
+          color="purple.100"
           border='none'
           css={{
             '&::-webkit-scrollbar':{

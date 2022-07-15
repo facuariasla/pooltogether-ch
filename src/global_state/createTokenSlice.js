@@ -4,6 +4,7 @@ export const createTokenSlice = (set, get) => ({
   tokenToBuy: null,
   tokenToReceive: null,
   ETHprice: null,
+  
   fetchTokens: async () => {
     const res = await fetch("https://api.0x.org/swap/v1/tokens");
     const data = await res.json();
@@ -15,8 +16,10 @@ export const createTokenSlice = (set, get) => ({
         index === self.findIndex((t) => t.symbol === value.symbol)
     );
 
+
     set({ tokens: dataFiltered });
   },
+
   // https://api.0x.org/swap/v1/price?sellToken=WETH&buyToken=USDT&sellAmount=1000000000000000000
   fetchETHPrice: async (selling, buying) => {
     // selling.address 
@@ -42,11 +45,13 @@ export const createTokenSlice = (set, get) => ({
       return message
     }
   },
+
   setTokenToBuy: (token) => {
     set({
       tokenToBuy: token,
     });
   },
+
   setTokenToReceive: (token) => {
     set({
       tokenToReceive: token,

@@ -20,7 +20,7 @@ const BuyPanels = () => {
       <Tabs w={["90%", null, "550px"]}>
         <TabList>
           <Tab
-            _selected={{ color: "#2D0B5A", bg: "#35F0D0" }}
+            _selected={{ color: "purple.100", bg: "cian.100" }}
             borderTopRadius={12}
             w="50%"
             fontWeight={500}
@@ -28,7 +28,7 @@ const BuyPanels = () => {
             Comprar
           </Tab>
           <Tab
-            _selected={{ color: "#2D0B5A", bg: "#35F0D0" }}
+            _selected={{ color: "purple.100", bg: "cian.100" }}
             borderTopRadius={12}
             w="50%"
             fontWeight={500}

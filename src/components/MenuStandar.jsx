@@ -20,16 +20,16 @@ const MenuStandar = () => {
       <MenuButton
         as={Button}
         h={8}
-        color="#35F0D0"
-        bgColor="#2D0B5A"
-        _hover={{ bgColor: "#2D0B5A", color: "#fff" }}
-        _active={{ bgColor: "#2D0B5A", color: "#fff" }}
+        color="cian.100"
+        bgColor="purple.100"
+        _hover={{ bgColor: "purple.100", color: "#fff" }}
+        _active={{ bgColor: "purple.100", color: "#fff" }}
         fontSize={30}
         display="flex"
       >
         <CgMenuLeft />
       </MenuButton>
-      <MenuList bgColor="#5227A7" color="#fff" border="none">
+      <MenuList bgColor="purple.50" color="#fff" border="none">
         <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
           <Link to="/">Home</Link>
         </MenuItem>

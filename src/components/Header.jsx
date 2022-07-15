@@ -38,7 +38,7 @@ const Header = () => {
           h={8}
           direction="row"
           display={navHead}
-          bgColor="#5227A7"
+          bgColor="purple.50"
           align="center"
           p={2}
           borderRadius={12}
@@ -48,9 +48,9 @@ const Header = () => {
               display="flex"
               justifyContent="center"
               h={6}
-              bgColor="#5227A7"
-              _active={{ backgroundColor: "#341762", color: '#fff' }}
-              _hover={{ backgroundColor: "#341762", color: '#fff' }}
+              bgColor="purple.50"
+              _active={{ backgroundColor: "purple.100", color: '#fff' }}
+              _hover={{ backgroundColor: "purple.100", color: '#fff' }}
               color="gray.300"
               borderRadius={12}
             >
@@ -62,9 +62,9 @@ const Header = () => {
               display="flex"
               justifyContent="center"
               h={6}
-              bgColor="#5227A7"
-              _active={{ backgroundColor: "#341762", color: '#fff' }}
-              _hover={{ backgroundColor: "#341762", color: '#fff' }}
+              bgColor="purple.50"
+              _active={{ backgroundColor: "purple.100", color: '#fff' }}
+              _hover={{ backgroundColor: "purple.100", color: '#fff' }}
               color="gray.300"
               borderRadius={12}
 
@@ -77,9 +77,9 @@ const Header = () => {
               display="flex"
               justifyContent="center"
               h={6}
-              bgColor="#5227A7"
-              _active={{ backgroundColor: "#341762", color: '#fff' }}
-              _hover={{ backgroundColor: "#341762", color: '#fff' }}
+              bgColor="purple.50"
+              _active={{ backgroundColor: "purple.100", color: '#fff' }}
+              _hover={{ backgroundColor: "purple.100", color: '#fff' }}
               color="gray.300"
               borderRadius={12}
 
@@ -92,9 +92,9 @@ const Header = () => {
               display="flex"
               justifyContent="center"
               h={6}
-              bgColor="#5227A7"
-              _active={{ backgroundColor: "#341762", color: '#fff' }}
-              _hover={{ backgroundColor: "#341762", color: '#fff' }}
+              bgColor="purple.50"
+              _active={{ backgroundColor: "purple.100", color: '#fff' }}
+              _hover={{ backgroundColor: "purple.100", color: '#fff' }}
               color="gray.300"
               borderRadius={12}
 
@@ -106,7 +106,7 @@ const Header = () => {
       </Stack>
 
         <Box display='flex' flexDirection="row" alignItems="center">
-          <Button h={9} bgColor="#35F0D0" color="#2D0B5A" >
+          <Button h={9} bgColor="cian.100" color="purple.100" >
             Connect Wallet
           </Button>
           <MenuStandar />

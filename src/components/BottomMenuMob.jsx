@@ -9,7 +9,7 @@ const BottomMenuMob = () => {
   return (
     <Stack
       zIndex={2}
-      bgColor="#5227A7"
+      bgColor="purple.50"
       position="fixed"
       bottom="0px"
       maxW="1280px"
@@ -30,9 +30,9 @@ const BottomMenuMob = () => {
             display="flex"
             justifyContent="center"
             h={8}
-            bgColor="#5227A7"
-            _active={{ backgroundColor: "#341762", color: "#fff" }}
-            _hover={{ backgroundColor: "#341762", color: "#fff" }}
+            bgColor="purple.50"
+            _active={{ backgroundColor: "purple.100", color: "#fff" }}
+            _hover={{ backgroundColor: "purple.100", color: "#fff" }}
             color="gray.300"
           >
             Depositar
@@ -43,9 +43,9 @@ const BottomMenuMob = () => {
             display="flex"
             justifyContent="center"
             h={8}
-            bgColor="#5227A7"
-            _active={{ backgroundColor: "#341762", color: "#fff" }}
-            _hover={{ backgroundColor: "#341762", color: "#fff" }}
+            bgColor="purple.50"
+            _active={{ backgroundColor: "purple.100", color: "#fff" }}
+            _hover={{ backgroundColor: "purple.100", color: "#fff" }}
             color="gray.300"
           >
             Premios
@@ -61,9 +61,9 @@ const BottomMenuMob = () => {
             display="flex"
             justifyContent="center"
             h={8}
-            bgColor="#5227A7"
-            _active={{ backgroundColor: "#341762", color: "#fff" }}
-            _hover={{ backgroundColor: "#341762", color: "#fff" }}
+            bgColor="purple.50"
+            _active={{ backgroundColor: "purple.100", color: "#fff" }}
+            _hover={{ backgroundColor: "purple.100", color: "#fff" }}
             color="gray.300"
           >
             Cuenta
@@ -74,9 +74,9 @@ const BottomMenuMob = () => {
             display="flex"
             justifyContent="center"
             h={8}
-            bgColor="#5227A7"
-            _active={{ backgroundColor: "#341762", color: "#fff" }}
-            _hover={{ backgroundColor: "#341762", color: "#fff" }}
+            bgColor="purple.50"
+            _active={{ backgroundColor: "purple.100", color: "#fff" }}
+            _hover={{ backgroundColor: "purple.100", color: "#fff" }}
             color="gray.300"
           >
             Buy/Sell

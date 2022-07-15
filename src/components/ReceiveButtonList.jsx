@@ -65,8 +65,8 @@ const ReceiveButtonList = () => {
           p={2}
           h={16}
           borderRadius={12}
-          bgColor={tokenToReceive ? "#35F0D0" : "#ff7979"}
-          color="#2D0B5A"
+          bgColor={tokenToReceive ? "cian.100" : "#ff7979"}
+          color="purple.100"
         >
           {tokenToReceive ? tokenToReceive.symbol : "TOKEN"}
         </MenuButton>
