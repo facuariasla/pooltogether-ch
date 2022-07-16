@@ -48,12 +48,11 @@ const BuyPanel = () => {
     fetchETHPrice();
   }, [fetchETHPrice]);
 
-  useEffect(()=>{
-    if(tokenToReceive && tokenToSell){
+  useEffect(() => {
+    if (tokenToReceive && tokenToSell) {
       setStandarTradePrice();
     }
-  },[tokenToReceive, tokenToSell])
-
+  }, [tokenToReceive, tokenToSell]);
 
   const favSell = () => {
     // Fav sell???
@@ -92,7 +91,7 @@ const BuyPanel = () => {
           <Stack spacing={8}>
             <Stack>
               <FormLabel htmlFor="inputSell" m={0}>
-                Cantidad
+                Quantity
               </FormLabel>
 
               <Stack size="md" display="flex" direction="row" align="center">
@@ -112,6 +111,7 @@ const BuyPanel = () => {
                   value={quantitySell || ""}
                   onChange={(e) => setQuantitySell(e.target.value)}
                 />
+             
                 <Stack direction="row" align="center">
                   <select
                     type="text"
@@ -124,7 +124,7 @@ const BuyPanel = () => {
                       fontWeight: "500",
                       border: "none",
                       textAlign: "center",
-                      width: "105px",
+                      width: "81px",
                     }}
                   >
                     <option
@@ -153,9 +153,9 @@ const BuyPanel = () => {
                       </option>
                     ))}
                   </select>
-                  {/* <Stack cursor="pointer" onClick={() => favSell()}>
+                  <Stack opacity="0.3" fontSize={18}>
                     <FaRegStar />
-                  </Stack> */}
+                  </Stack>
                 </Stack>
                 {/* {tokens ? (
                   <BuyButtonList />
@@ -233,7 +233,12 @@ const BuyPanel = () => {
                       </option>
                     ))}
                   </select>
-                  <Stack cursor="pointer" onClick={() => favBuy()}>
+                  <Stack
+                    fontSize={18}
+                    color="white"
+                    cursor="pointer"
+                    onClick={() => favBuy()}
+                  >
                     {/* <FaRegStar /> */}
                     {isFav ? <FaStar /> : <FaRegStar />}
                   </Stack>
@@ -253,14 +258,14 @@ const BuyPanel = () => {
             <Button
               // _disabled={(isFav&&goodAverage)?'':''}
               // disabled={false}
-              disabled={isFav? true: false}
+              disabled={isFav ? true : false}
               fontWeight={500}
               h={10}
               borderRadius={12}
               bgColor="cian.100"
               color="purple.100"
             >
-              {isFav? 'Wait average...':'Complete'}
+              {isFav ? "Wait average..." : "Complete"}
             </Button>
           </Stack>
         </FormControl>
@@ -270,7 +275,10 @@ const BuyPanel = () => {
       {/* <p>pago: {quantitySell}</p>
       <p>recibo: {quantityBuy}</p> */}
       <p>You sell 1 {tokenToSell?.symbol}</p>
-      <p>You get: {standarTradePrice? standarTradePrice.price:''} {tokenToReceive?.symbol}</p>
+      <p>
+        You get: {standarTradePrice ? standarTradePrice.price : ""}{" "}
+        {tokenToReceive?.symbol}
+      </p>
     </Stack>
   );
 };

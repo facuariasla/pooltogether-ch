@@ -25,7 +25,7 @@ const BuyPanels = () => {
             w="50%"
             fontWeight={500}
           >
-            Comprar
+            Buy
           </Tab>
           <Tab
             _selected={{ color: "purple.100", bg: "cian.100" }}
@@ -33,7 +33,7 @@ const BuyPanels = () => {
             w="50%"
             fontWeight={500}
           >
-            Vender
+            Sell
           </Tab>
         </TabList>
 
