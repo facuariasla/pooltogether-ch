@@ -7,6 +7,7 @@ import {
   Button,
   FormLabel,
   Skeleton,
+  useToast,
 } from "@chakra-ui/react";
 import { FaChevronRight, FaStar, FaRegStar } from "react-icons/fa";
 
@@ -16,6 +17,7 @@ import ReceiveButtonList from "./ReceiveButtonList";
 
 const BuyPanel = () => {
   const walletTokens = useStore((state) => state.walletTokens);
+  const toast = useToast();
 
   const tokens = useStore((state) => state.tokens);
   const fetchTokens = useStore((state) => state.fetchTokens);
@@ -36,33 +38,36 @@ const BuyPanel = () => {
   const setStandarTradePrice = useStore((state) => state.setStandarTradePrice);
 
   const [isFav, setIsFav] = useState(false);
-  const [disabledBtn, setDisabledBtn] = useState(true);
+  const [disabledBtn, setDisabledBtn] = useState(false);
   const [disabledInput, setDisabledInput] = useState(true);
 
   const [quantitySell, setQuantitySell] = useState(0);
   const [quantityBuy, setQuantityBuy] = useState(0);
 
+  // Trae todos los tokens, y setea el precio de ETH
   useEffect(() => {
     fetchETHPrice();
     fetchTokens();
   }, [fetchETHPrice, fetchTokens]);
 
+  // Setea el precio para el token seleccionado
   useEffect(() => {
     if (tokenToReceive && tokenToSell) {
       setStandarTradePrice();
       setDisabledInput(false);
       const newPrice = async () => {
         const newStandarP = await setStandarTradePrice();
-        console.log('estandar price', newStandarP?.price)
+        console.log("estandar price", newStandarP?.price);
         return setQuantityBuy(quantitySell * newStandarP?.price);
-      }
+      };
       newPrice();
-    
     } else {
       setDisabledInput(true);
     }
   }, [tokenToReceive, tokenToSell]);
 
+  // Cambia el color de la estrella, si esta en fav ese token
+  // agregar otras condiciones, como la de disableBtn etc
   useEffect(() => {
     console.log(favTokens);
     console.log(tokenToReceive);
@@ -72,19 +77,22 @@ const BuyPanel = () => {
         setDisabledBtn(true);
       } else {
         setIsFav(false);
+        setDisabledBtn(false);
       }
   }, [tokenToReceive]);
 
-  // 
-
+  // setea/elimina favorito
   const favBuy = () => {
-    if(!tokenToReceive)return
+    if (!tokenToReceive) return;
     // console.log("recibo", tokenToReceive);
     setIsFav(!isFav);
+    setDisabledBtn(!disabledBtn);
+    //
     addToFav(tokenToReceive);
     console.log(favTokens);
   };
 
+  // setea el precio en el input Receive a comprar
   const setPrices = (sellQuantity) => {
     setQuantitySell(sellQuantity);
     console.log(sellQuantity);
@@ -92,12 +100,31 @@ const BuyPanel = () => {
       setQuantityBuy(sellQuantity * standarTradePrice.price);
       console.log(standarTradePrice.price);
       console.log(sellQuantity * standarTradePrice.price);
-      setDisabledBtn(false);
+
+      if (favTokens.length !== 0 && tokenToReceive)
+        if (favTokens.includes(tokenToReceive)) {
+          setIsFav(true);
+          setDisabledBtn(true);
+        } else {
+          setIsFav(false);
+        }
+      //
       if (sellQuantity * standarTradePrice.price === 0) {
-        setDisabledBtn(true);
+        // setDisabledBtn(true);
       }
     } else {
       console.log("no entro");
+    }
+  };
+
+  const handlBuy = (e) => {
+    e.preventDefault();
+    if (quantityBuy <= 0) {
+      alert('Selecciona un token y una cantidad');
+      console.log('Aca iria toast de error')
+    } else {
+      alert('Compra realizada con exito')
+      console.log('Aca iria toast de respuesta al backend, con exito')
     }
   };
 
@@ -125,6 +152,7 @@ const BuyPanel = () => {
                   h={16}
                   placeholder="0.000"
                   borderRadius={12}
+                  required
                   color="#fff"
                   _placeholder={{ fontWeight: "400" }}
                   fontWeight={500}
@@ -178,7 +206,7 @@ const BuyPanel = () => {
                       </option>
                     ))}
                   </select>
-                  <Stack color='gray.600' fontSize={18} cursor='not-allowed'>
+                  <Stack opacity="0" fontSize={18}>
                     <FaRegStar />
                   </Stack>
                 </Stack>
@@ -262,10 +290,9 @@ const BuyPanel = () => {
                     ))}
                   </select>
                   <Stack
-
                     fontSize={18}
-                    color={tokenToReceive? '#fff':'gray.600'}
-                    cursor={tokenToReceive? 'pointer':'not-allowed'}
+                    color={tokenToReceive ? "#fff" : "gray.600"}
+                    cursor={tokenToReceive ? "pointer" : "not-allowed"}
                     onClick={() => favBuy()}
                   >
                     {/* <FaRegStar /> */}
@@ -293,8 +320,10 @@ const BuyPanel = () => {
               borderRadius={12}
               bgColor="cian.100"
               color="purple.100"
+              type="submit"
+              onClick={(e) => handlBuy(e)}
             >
-              Complete
+              {disabledBtn? 'Best average...':'Complete'}
             </Button>
           </Stack>
         </FormControl>
@@ -303,7 +332,11 @@ const BuyPanel = () => {
       </form>
       {/* <p>pago: {quantitySell}</p>
       <p>recibo: {quantityBuy}</p> */}
-      <p>You sell 1 {tokenToSell?.symbol} --- you get {standarTradePrice ? standarTradePrice.price : ""} {tokenToReceive?.symbol}</p>
+      <p>
+        You sell 1 {tokenToSell?.symbol} --- you get{" "}
+        {standarTradePrice ? standarTradePrice.price : ""}{" "}
+        {tokenToReceive?.symbol}
+      </p>
     </Stack>
   );
 };

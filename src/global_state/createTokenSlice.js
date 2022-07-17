@@ -70,7 +70,7 @@ export const createTokenSlice = (set, get) => ({
   tokenToSell: null,
   tokenToReceive: null,
   ETHprice: null,
-  standarTradePrice:null,
+  standarTradePrice: null,
 
   fetchTokens: async () => {
     const res = await fetch("https://api.0x.org/swap/v1/tokens");
@@ -99,6 +99,8 @@ export const createTokenSlice = (set, get) => ({
     if (get().favTokens.length < 3) {
       if (!get().favTokens.includes(xToken)) {
         //Si no lo incluye, que lo agregue
+        // xToken.fav = true;
+        // xToken.lastValues = [];
         set({
           favTokens: [xToken, ...get().favTokens],
         });
@@ -124,7 +126,7 @@ export const createTokenSlice = (set, get) => ({
         // Si no lo incluye al token, que saque al ultimo
         // y lo agregue al inicio
         const newFavs = get().favTokens;
-        console.log('deleted: ',newFavs[2]);
+        console.log("deleted: ", newFavs[2]);
         newFavs.pop();
         newFavs.unshift(xToken);
         set({
@@ -156,13 +158,13 @@ export const createTokenSlice = (set, get) => ({
     });
   },
 
-  setStandarTradePrice: async()=>{
+  setStandarTradePrice: async () => {
     // funcion que se dispare, solo si existe un tokenToSell, y tokenToBuy
     // esta condicion va en useEffect de BuyPanel
 
     const toSell = get().tokenToSell;
     const toBuy = get().tokenToReceive;
-    console.log(toSell.decimals)
+    console.log(toSell.decimals);
     // const arrZeros = Array.from({ length: toSell.decimals }.fill(0));
     const arrZeros = Array.from(Array(toSell.decimals).keys());
     const strZeros = arrZeros.fill(0).join("");
@@ -173,16 +175,14 @@ export const createTokenSlice = (set, get) => ({
     const data = await res.json();
     set({
       standarTradePrice: data,
-    })
-    return data
+    });
+    return data;
   },
-  setBestAverage: async()=>{
+  setBestAverage: async () => {
     // funcion que se dispare, solo si existe un tokenToSell, y favTokens
     const res = await fetch(
       `https://api.0x.org/swap/v1/price?sellToken=ETH&buyToken=USDT&sellAmount=1000000000000000000`
     );
     const data = await res.json();
   },
-
-
 });

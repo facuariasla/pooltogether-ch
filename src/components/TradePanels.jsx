@@ -27,14 +27,14 @@ const BuyPanels = () => {
           >
             Buy
           </Tab>
-          <Tab
+          {/* <Tab
             _selected={{ color: "purple.100", bg: "cian.100" }}
             borderTopRadius={12}
             w="50%"
             fontWeight={500}
           >
             Sell
-          </Tab>
+          </Tab> */}
         </TabList>
 
         {/* BUY PANEL */}
@@ -44,9 +44,9 @@ const BuyPanels = () => {
           </TabPanel>
 
           {/* SELL PANEL*/}
-          <TabPanel>
+          {/* <TabPanel>
             <SellPanel />
-          </TabPanel>
+          </TabPanel> */}
         </TabPanels>
       </Tabs>
     </Stack>
