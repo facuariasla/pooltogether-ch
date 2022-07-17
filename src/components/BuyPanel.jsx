@@ -23,9 +23,6 @@ const BuyPanel = () => {
   const ETHprice = useStore((state) => state.ETHprice);
   const fetchETHPrice = useStore((state) => state.fetchETHPrice);
 
-  const [quantitySell, setQuantitySell] = useState();
-  const [quantityBuy, setQuantityBuy] = useState();
-
   const tokenToSell = useStore((state) => state.tokenToSell);
   const setTokenToSell = useStore((state) => state.setTokenToSell);
 
@@ -39,26 +36,46 @@ const BuyPanel = () => {
   const setStandarTradePrice = useStore((state) => state.setStandarTradePrice);
 
   const [isFav, setIsFav] = useState(false);
+  const [disabledBtn, setDisabledBtn] = useState(true);
+  const [disabledInput, setDisabledInput] = useState(true);
 
-  useEffect(() => {
-    fetchTokens();
-  }, [fetchTokens]);
+  const [quantitySell, setQuantitySell] = useState(0);
+  const [quantityBuy, setQuantityBuy] = useState(0);
 
   useEffect(() => {
     fetchETHPrice();
-  }, [fetchETHPrice]);
+    fetchTokens();
+  }, [fetchETHPrice, fetchTokens]);
 
   useEffect(() => {
     if (tokenToReceive && tokenToSell) {
       setStandarTradePrice();
+      setDisabledInput(false);
+      const newPrice = async () => {
+        const newStandarP = await setStandarTradePrice();
+        console.log('estandar price', newStandarP?.price)
+        return setQuantityBuy(quantitySell * newStandarP?.price);
+      }
+      newPrice();
+    
+    } else {
+      setDisabledInput(true);
     }
   }, [tokenToReceive, tokenToSell]);
 
-  const favSell = () => {
-    // Fav sell???
-    console.log("vendo", tokenToSell);
-    if (tokenToSell) addToFav(tokenToSell);
-  };
+  useEffect(() => {
+    console.log(favTokens);
+    console.log(tokenToReceive);
+    if (favTokens.length !== 0 && tokenToReceive)
+      if (favTokens.includes(tokenToReceive)) {
+        setIsFav(true);
+        setDisabledBtn(true);
+      } else {
+        setIsFav(false);
+      }
+  }, [tokenToReceive]);
+
+  // 
 
   const favBuy = () => {
     // console.log("recibo", tokenToReceive);
@@ -67,16 +84,21 @@ const BuyPanel = () => {
     console.log(favTokens);
   };
 
-  useEffect(() => {
-    console.log(favTokens);
-    console.log(tokenToReceive);
-    if (favTokens.length !== 0 && tokenToReceive)
-      if (favTokens.includes(tokenToReceive)) {
-        setIsFav(true);
-      } else {
-        setIsFav(false);
+  const setPrices = (sellQuantity) => {
+    setQuantitySell(sellQuantity);
+    console.log(sellQuantity);
+    if (standarTradePrice) {
+      setQuantityBuy(sellQuantity * standarTradePrice.price);
+      console.log(standarTradePrice.price);
+      console.log(sellQuantity * standarTradePrice.price);
+      setDisabledBtn(false);
+      if (sellQuantity * standarTradePrice.price === 0) {
+        setDisabledBtn(true);
       }
-  }, [tokenToReceive]);
+    } else {
+      console.log("no entro");
+    }
+  };
 
   return (
     <Stack pb={10}>
@@ -108,10 +130,11 @@ const BuyPanel = () => {
                   bgColor="#493171"
                   border="none"
                   fontSize={20}
-                  value={quantitySell || ""}
-                  onChange={(e) => setQuantitySell(e.target.value)}
+                  value={quantitySell}
+                  onChange={(e) => setPrices(e.target.value)}
+                  disabled={disabledInput ? true : false}
                 />
-             
+
                 <Stack direction="row" align="center">
                   <select
                     type="text"
@@ -171,7 +194,7 @@ const BuyPanel = () => {
 
             <Stack>
               <FormLabel htmlFor="inputBuy" m={0}>
-                Recibir
+                Receive
               </FormLabel>
 
               <Stack size="md" display="flex" direction="row" align="center">
@@ -189,8 +212,10 @@ const BuyPanel = () => {
                   bgColor="#493171"
                   border="none"
                   fontSize={20}
-                  value={quantityBuy || ""}
-                  onChange={(e) => setQuantityBuy(e.target.value)}
+                  value={quantityBuy}
+                  // onChange={(e) => setQuantityBuy(e.target.value)}
+                  readOnly
+                  disabled={true}
                 />
                 <Stack direction="row" align="center">
                   <select
@@ -258,14 +283,14 @@ const BuyPanel = () => {
             <Button
               // _disabled={(isFav&&goodAverage)?'':''}
               // disabled={false}
-              disabled={isFav ? true : false}
+              disabled={disabledBtn ? true : false}
               fontWeight={500}
               h={10}
               borderRadius={12}
               bgColor="cian.100"
               color="purple.100"
             >
-              {isFav ? "Wait average..." : "Complete"}
+              Complete
             </Button>
           </Stack>
         </FormControl>

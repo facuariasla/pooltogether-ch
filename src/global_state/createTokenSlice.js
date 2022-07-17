@@ -174,6 +174,7 @@ export const createTokenSlice = (set, get) => ({
     set({
       standarTradePrice: data,
     })
+    return data
   },
   setBestAverage: async()=>{
     // funcion que se dispare, solo si existe un tokenToSell, y favTokens
