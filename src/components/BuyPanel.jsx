@@ -78,6 +78,7 @@ const BuyPanel = () => {
   // 
 
   const favBuy = () => {
+    if(!tokenToReceive)return
     // console.log("recibo", tokenToReceive);
     setIsFav(!isFav);
     addToFav(tokenToReceive);
@@ -138,6 +139,7 @@ const BuyPanel = () => {
                 <Stack direction="row" align="center">
                   <select
                     type="text"
+                    value={tokenToSell?.symbol}
                     onChange={(e) => setTokenToSell(e.target.value)}
                     style={{
                       height: "60px",
@@ -176,7 +178,7 @@ const BuyPanel = () => {
                       </option>
                     ))}
                   </select>
-                  <Stack opacity="0.3" fontSize={18}>
+                  <Stack color='gray.600' fontSize={18} cursor='not-allowed'>
                     <FaRegStar />
                   </Stack>
                 </Stack>
@@ -220,6 +222,7 @@ const BuyPanel = () => {
                 <Stack direction="row" align="center">
                   <select
                     type="text"
+                    value={tokenToReceive?.symbol}
                     onChange={(e) => setTokenToReceive(e.target.value)}
                     style={{
                       height: "60px",
@@ -259,9 +262,10 @@ const BuyPanel = () => {
                     ))}
                   </select>
                   <Stack
+
                     fontSize={18}
-                    color="white"
-                    cursor="pointer"
+                    color={tokenToReceive? '#fff':'gray.600'}
+                    cursor={tokenToReceive? 'pointer':'not-allowed'}
                     onClick={() => favBuy()}
                   >
                     {/* <FaRegStar /> */}
@@ -299,11 +303,7 @@ const BuyPanel = () => {
       </form>
       {/* <p>pago: {quantitySell}</p>
       <p>recibo: {quantityBuy}</p> */}
-      <p>You sell 1 {tokenToSell?.symbol}</p>
-      <p>
-        You get: {standarTradePrice ? standarTradePrice.price : ""}{" "}
-        {tokenToReceive?.symbol}
-      </p>
+      <p>You sell 1 {tokenToSell?.symbol} --- you get {standarTradePrice ? standarTradePrice.price : ""} {tokenToReceive?.symbol}</p>
     </Stack>
   );
 };
