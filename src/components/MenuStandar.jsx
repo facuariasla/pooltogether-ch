@@ -35,20 +35,27 @@ const MenuStandar = () => {
         <CgMenuLeft />
       </MenuButton>
       <MenuList bgColor="purple.50" color="#fff" border="none">
-        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
-          <Link to="/">Home</Link>
-        </MenuItem>
-        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
-          <Link to="/buy">Buy/Sell</Link>
-        </MenuItem>
-        <MenuItem
-        _hover={{background:'none'}}
-          w='100%'
-          cursor='auto'
-        >
+        <Link to="/">
+          <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+            Home
+          </MenuItem>
+        </Link>
+
+        <Link to="/buy">
+          <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+            Buy/Sell
+          </MenuItem>
+        </Link>
+
+        <Link to="/payment">
+          <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
+            Depositar
+          </MenuItem>
+        </Link>
+        <MenuItem _hover={{ background: "none" }} w="100%" cursor="auto">
           <Stack direction="row" align="center" justify="space-around">
             <Text>{realUSD ? realUSD : "0"} USD</Text>
-            <RiMoneyDollarCircleLine color='yellow'/>
+            <RiMoneyDollarCircleLine color="yellow" />
           </Stack>
         </MenuItem>
       </MenuList>
