@@ -85,13 +85,11 @@ const BuyPanel = () => {
   // Hace una call a la peticion fetch para saber los precios
   useEffect(() => {
     const interval = setInterval(async () => {
-      console.log(tokenToReceive);
-      let ActualToken = tokenToReceive.symbol;
+      let ActualToken = tokenToReceive?.symbol;
       // setBestAverage();
       const fivePrices = async () => {
         let dataPrices = await setBestAverage();
         console.log(dataPrices);
-        console.log(tokenToReceive);
         if (dataPrices[ActualToken]) {
           if (dataPrices[ActualToken].lastValues.length === 5) {
             let newArray = dataPrices[ActualToken].lastValues;
