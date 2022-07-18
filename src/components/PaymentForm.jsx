@@ -20,12 +20,7 @@ const PaymentForm = () => {
     formState: { errors },
     watch,
     handleSubmit,
-  } = useForm({
-    defaultValues: {
-      nombre: "Luis",
-      email: "luis@hotmail.com",
-    },
-  });
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
