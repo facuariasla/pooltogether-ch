@@ -179,7 +179,7 @@ const BuyPanel = () => {
           <Stack spacing={8}>
             <Stack>
               <FormLabel htmlFor="inputSell" m={0}>
-                Quantity
+                You sell
               </FormLabel>
 
               <Stack size="md" display="flex" direction="row" align="center">
