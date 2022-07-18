@@ -87,8 +87,7 @@ export const createTokenSlice = (set, get) => ({
     set({ tokens: dataFiltered });
   },
 
-  // https://api.0x.org/swap/v1/price?sellToken=WETH&buyToken=USDT&sellAmount=1000000000000000000
-  fetchETHPrice: async (selling, buying) => {
+  fetchETHPrice: async () => {
     const res = await fetch(
       "https://api.0x.org/swap/v1/price?sellToken=ETH&buyToken=USDT&sellAmount=1000000000000000000"
     );
@@ -99,22 +98,15 @@ export const createTokenSlice = (set, get) => ({
   addToFav: (xToken) => {
     if (get().favTokens.length < 3) {
       if (!get().favTokens.includes(xToken)) {
-        //Si no lo incluye, que lo agregue
-        // xToken.fav = true;
-        // xToken.lastValues = [];
         set({
           favTokens: [xToken, ...get().favTokens],
         });
       } else {
-        // Si ya lo incluye, que lo saque
         const newFavs = get().favTokens.filter((el) => el !== xToken);
         set({
           favTokens: newFavs,
         });
       }
-      // set({
-      //   favTokens: [...new Set([...get().favTokens, xToken])],
-      // });
     } else {
       // Si el favsTokens tiene 3 elementos:
       if (get().favTokens.includes(xToken)) {
@@ -179,17 +171,6 @@ export const createTokenSlice = (set, get) => ({
     });
     return data;
   },
-  // setBestAverage: async()=>{
-  //   console.log(get().faVtokens)
-  //   console.log(get().favLastPrices)
-
-  //   set({
-  //     favLastPrices:{
-  //       ...get().favLastPrices,
-  //       data: 'ni idea'
-  //     }
-  //   })
-  // }
 
   setBestAverage: async () => {
     // funcion que se dispare, solo si existe un tokenToSell, y favTokens

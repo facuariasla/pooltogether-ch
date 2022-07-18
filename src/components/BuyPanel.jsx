@@ -6,8 +6,6 @@ import {
   Input,
   Button,
   FormLabel,
-  Skeleton,
-  useToast,
 } from "@chakra-ui/react";
 import { FaChevronRight, FaStar, FaRegStar } from "react-icons/fa";
 
@@ -17,7 +15,6 @@ import ReceiveButtonList from "./ReceiveButtonList";
 
 const BuyPanel = () => {
   const walletTokens = useStore((state) => state.walletTokens);
-  const toast = useToast();
 
   const tokens = useStore((state) => state.tokens);
   const fetchTokens = useStore((state) => state.fetchTokens);
@@ -103,7 +100,6 @@ const BuyPanel = () => {
               const element = parseFloat(newArray[i]);
               sum = sum + element;
             }
-            console.log("aver", sum / 5);
             let average = sum / newArray.length;
             if (newArray[0] <= average) {
               setDisabledBtn(false);
@@ -123,7 +119,6 @@ const BuyPanel = () => {
   // setea/elimina favorito
   const favBuy = () => {
     if (!tokenToReceive) return;
-    // console.log("recibo", tokenToReceive);
     setIsFav(!isFav);
     setDisabledBtn(!disabledBtn);
     //
@@ -351,8 +346,7 @@ const BuyPanel = () => {
             </Stack>
 
             <Button
-              // _disabled={(isFav&&goodAverage)?'':''}
-              // disabled={false}
+
               disabled={disabledBtn ? true : false}
               fontWeight={500}
               h={10}
@@ -367,10 +361,8 @@ const BuyPanel = () => {
           </Stack>
         </FormControl>
 
-        {/* ACA VA UN CONDITIONAL BUTTON */}
       </form>
-      {/* <p>pago: {quantitySell}</p>
-      <p>recibo: {quantityBuy}</p> */}
+
       <p>
         You sell 1 {tokenToSell?.symbol} --- you get{" "}
         {standarTradePrice ? standarTradePrice.price : ""}{" "}
