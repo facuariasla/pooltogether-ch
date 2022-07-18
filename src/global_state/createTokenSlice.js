@@ -67,6 +67,7 @@ export const createTokenSlice = (set, get) => ({
   ],
   tokens: null,
   favTokens: [],
+  favLastPrices: {},
   tokenToSell: null,
   tokenToReceive: null,
   ETHprice: null,
@@ -178,11 +179,65 @@ export const createTokenSlice = (set, get) => ({
     });
     return data;
   },
+  // setBestAverage: async()=>{
+  //   console.log(get().faVtokens)
+  //   console.log(get().favLastPrices)
+
+  //   set({
+  //     favLastPrices:{
+  //       ...get().favLastPrices,
+  //       data: 'ni idea'
+  //     }
+  //   })
+  // }
+
   setBestAverage: async () => {
     // funcion que se dispare, solo si existe un tokenToSell, y favTokens
-    const res = await fetch(
-      `https://api.0x.org/swap/v1/price?sellToken=ETH&buyToken=USDT&sellAmount=1000000000000000000`
-    );
-    const data = await res.json();
+    // Manejar este condicional en el componente
+
+    get().favTokens.map(async (token) => {
+      let res = await fetch(
+        // Token comparado con 1 DAI (stablecoin)
+        // 'Si vendo 1 DAI, obtengo xToken cantidad'
+        `https://api.0x.org/swap/v1/price?sellToken=0x6b175474e89094c44da98b954eedeac495271d0f&buyToken=${token.address}&sellAmount=1000000000000000000`
+      );
+      let data = await res.json();
+      let price = await data.price;
+
+      if (get().favLastPrices[token.symbol] === undefined) {
+        set({
+          favLastPrices: {
+            ...get().favLastPrices,
+            [token.symbol]: { lastValues: [price] },
+          },
+        });
+        console.log(get().favLastPrices);
+      } else {
+        let ArrayXToken = get().favLastPrices[token.symbol].lastValues;
+        let longArray = ArrayXToken.length;
+        if (longArray < 5) {
+          ArrayXToken.unshift(price);
+          set({
+            favLastPrices: {
+              ...get().favLastPrices,
+              [token.symbol]: { lastValues: ArrayXToken },
+            },
+          });
+          console.log(get().favLastPrices);
+        } else {
+          ArrayXToken.pop();
+          ArrayXToken.unshift(price);
+          set({
+            favLastPrices: {
+              ...get().favLastPrices,
+              [token.symbol]: { lastValues: ArrayXToken },
+            },
+          });
+          console.log(get().favLastPrices);
+        }
+      }
+    });
+
+    return get().favLastPrices;
   },
 });

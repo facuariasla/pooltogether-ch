@@ -37,6 +37,10 @@ const BuyPanel = () => {
   const standarTradePrice = useStore((state) => state.standarTradePrice);
   const setStandarTradePrice = useStore((state) => state.setStandarTradePrice);
 
+  // Objeto con 3 favs, que tienen los 5 ultimos precios de c/u
+  const favLastPrices = useStore((state) => state.favLastPrices);
+  const setBestAverage = useStore((state) => state.setBestAverage);
+
   const [isFav, setIsFav] = useState(false);
   const [disabledBtn, setDisabledBtn] = useState(false);
   const [disabledInput, setDisabledInput] = useState(true);
@@ -81,6 +85,41 @@ const BuyPanel = () => {
       }
   }, [tokenToReceive]);
 
+  // Hace una call a la peticion fetch para saber los precios
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      console.log(tokenToReceive);
+      let ActualToken = tokenToReceive.symbol;
+      // setBestAverage();
+      const fivePrices = async () => {
+        let dataPrices = await setBestAverage();
+        console.log(dataPrices);
+        console.log(tokenToReceive);
+        if (dataPrices[ActualToken]) {
+          if (dataPrices[ActualToken].lastValues.length === 5) {
+            let newArray = dataPrices[ActualToken].lastValues;
+            let sum = 0;
+            for (let i = 0; i < newArray.length; i++) {
+              const element = parseFloat(newArray[i]);
+              sum = sum + element;
+            }
+            console.log("aver", sum / 5);
+            let average = sum / newArray.length;
+            if (newArray[0] <= average) {
+              setDisabledBtn(false);
+              console.log({ actual: newArray[0], prom: average });
+            } else {
+              setDisabledBtn(true);
+              console.log({ actual: newArray[0], prom: average });
+            }
+          }
+        }
+      };
+      fivePrices();
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [tokenToReceive]);
+
   // setea/elimina favorito
   const favBuy = () => {
     if (!tokenToReceive) return;
@@ -120,11 +159,11 @@ const BuyPanel = () => {
   const handlBuy = (e) => {
     e.preventDefault();
     if (quantityBuy <= 0) {
-      alert('Selecciona un token y una cantidad');
-      console.log('Aca iria toast de error')
+      alert("Selecciona un token y una cantidad");
+      console.log("Aca iria toast de error");
     } else {
-      alert('Compra realizada con exito')
-      console.log('Aca iria toast de respuesta al backend, con exito')
+      alert("Compra realizada con exito");
+      console.log("Aca iria toast de respuesta al backend, con exito");
     }
   };
 
@@ -323,7 +362,7 @@ const BuyPanel = () => {
               type="submit"
               onClick={(e) => handlBuy(e)}
             >
-              {disabledBtn? 'Best average...':'Complete'}
+              {disabledBtn ? "Best average..." : "Complete"}
             </Button>
           </Stack>
         </FormControl>
