@@ -25,7 +25,7 @@ const BottomMenuMob = () => {
         borderRadius={12}
       >
         <Stack direction={bottomDir} align='center'>
-        <Link to="/">
+        <Link to="/payment">
           <Button
             display="flex"
             justifyContent="center"

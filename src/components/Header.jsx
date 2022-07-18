@@ -43,7 +43,7 @@ const Header = () => {
           p={2}
           borderRadius={12}
         >
-          <Link to="/">
+          <Link to="/payment">
             <Button
               display="flex"
               justifyContent="center"

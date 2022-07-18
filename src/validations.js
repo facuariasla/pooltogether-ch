@@ -3,6 +3,7 @@ export const ageValidator = (value) => {
 };
 
 export const cardNumberLengthValid = (value) => {
+  // let deleteSpaces = value.split(' ').join('');
   let toStr = value.toString();
   let firstFour = toStr.substr(0, 4);
   let toInt = parseInt(firstFour);
@@ -12,3 +13,6 @@ export const CardCVV = (value) => {
   let toStr = value.toString();
   return toStr.length === 3;
 };
+export const positiveAmount = (value) => {
+  return value > 10
+}

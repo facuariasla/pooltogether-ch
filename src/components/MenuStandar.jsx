@@ -10,17 +10,22 @@ import {
   MenuOptionGroup,
   MenuDivider,
   Button,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 import { CgMenuLeft } from "react-icons/cg";
+import useStore from "../global_state";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
 // CgMenuLeft
 const MenuStandar = () => {
+  const realUSD = useStore((state) => state.realUSD);
+
   return (
     <Menu>
       <MenuButton
         as={Button}
         h={8}
-        color="cian.100"
         bgColor="purple.100"
         _hover={{ bgColor: "purple.100", color: "#fff" }}
         _active={{ bgColor: "purple.100", color: "#fff" }}
@@ -35,15 +40,16 @@ const MenuStandar = () => {
         </MenuItem>
         <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
           <Link to="/buy">Buy/Sell</Link>
-        </MenuItem>{" "}
-        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
-          Lorem2
         </MenuItem>
-        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
-          Lorem3
-        </MenuItem>
-        <MenuItem _hover={{ color: "black", backgroundColor: "#fff" }}>
-          Lorem4
+        <MenuItem
+        _hover={{background:'none'}}
+          w='100%'
+          cursor='auto'
+        >
+          <Stack direction="row" align="center" justify="space-around">
+            <Text>{realUSD ? realUSD : "0"} USD</Text>
+            <RiMoneyDollarCircleLine color='yellow'/>
+          </Stack>
         </MenuItem>
       </MenuList>
     </Menu>
