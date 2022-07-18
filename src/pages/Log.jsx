@@ -1,10 +1,10 @@
 import React from 'react'
-import LogForm from '../components/LogForm'
+import PaymentForm from '../components/PaymentForm'
 
 const Log = () => {
   return (
     <div>
-      <LogForm/>
+      <PaymentForm/>
     </div>
   )
 }
