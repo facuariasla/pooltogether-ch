@@ -48,9 +48,9 @@ const PaymentForm = () => {
 
 
   return (
-    <Box display="flex" justifyContent="center" minH="100vh">
-      <Box width="100%" h="100%" maxW="1280px">
-        <Stack>
+    <Box display="flex" justifyContent="center" pb={['100px', null, '50px']}>
+      <Box width="100%" h="100%" maxW="1280px" align='center'>
+        <Stack maxW='500px' px={4}>
           <Stack>
             <Heading>Payment Details</Heading>
             <Text>
@@ -90,7 +90,7 @@ const PaymentForm = () => {
                     </Stack>
 
                     <Stack direction='row'>
-                      <Stack spacing={1} w='100%'>
+                      <Stack spacing={1} w='50%'>
                         <FormLabel m={0} p={0}>Month/Year</FormLabel>
                         <Input type='month' min={`${currentDate()}`} {...register('card_date', {
                           required: true,
@@ -98,7 +98,7 @@ const PaymentForm = () => {
                         {errors.card_date && <p>Specify a date</p>}
                       </Stack>
 
-                      <Stack spacing={1} w='100%'>
+                      <Stack spacing={1} w='50%'>
                         <FormLabel m={0} p={0}>CVV</FormLabel>
                         <Input type='number' {...register('card_cvv', {
                           required: true,
@@ -120,7 +120,7 @@ const PaymentForm = () => {
                       </Stack>
                       }
   
-                      <Button type='submit'>Send</Button>
+                      <Button type='submit' bgColor='cian.100' color='purple.100'>Send</Button>
                   </Stack>
                 </FormControl>
               </form>

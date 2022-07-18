@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import {Routes, Route, useNavigate} from 'react-router-dom';
+
 import {
   Stack,
   Text,
@@ -14,6 +16,8 @@ import BuyButtonList from "./BuyButtonList";
 import ReceiveButtonList from "./ReceiveButtonList";
 
 const BuyPanel = () => {
+  const navigate = useNavigate();
+
   const walletTokens = useStore((state) => state.walletTokens);
 
   const tokens = useStore((state) => state.tokens);
@@ -155,8 +159,10 @@ const BuyPanel = () => {
       alert("Selecciona un token y una cantidad");
       console.log("Aca iria toast de error");
     } else {
-      alert("Compra realizada con exito");
-      console.log("Aca iria toast de respuesta al backend, con exito");
+      alert("Enviando a pago con tarjeta");
+      console.log("Enviando a pago con tarjeta");
+      navigate('/payment');
+
     }
   };
 
@@ -344,7 +350,6 @@ const BuyPanel = () => {
             </Stack>
 
             <Button
-
               disabled={disabledBtn ? true : false}
               fontWeight={500}
               h={10}
