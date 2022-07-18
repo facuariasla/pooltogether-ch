@@ -49,6 +49,9 @@ const BuyPanel = () => {
   const [quantitySell, setQuantitySell] = useState(0);
   const [quantityBuy, setQuantityBuy] = useState(0);
 
+  const realUSD = useStore((state) => state.realUSD);
+  const setRealUSD = useStore((state) => state.setRealUSD);
+
   // Trae todos los tokens, y setea el precio de ETH
   useEffect(() => {
     fetchETHPrice();
