@@ -1,5 +1,5 @@
 ### Link de acceso:
-https://pooltogether-ch.vercel.app/#/buy
+https://pooltogether-ch.vercel.app/
 
 #### Descripción
 * Funcionalidades básicas
